@@ -12,7 +12,7 @@ from pymatgen.io.vasp.sets import MPRelaxSet          # A pymatgen function whic
                                                       # The calculation file generated will be compatible with
                                                       # materialsproject website.
 
-file_input = 'E:\\ehull\\peroviskate.\\CaTiO3_mp-5827_primitive.cif' # the input CIF file, which will be 'KAlCl4'
+file_input = '.\\CaTiO3_mp-5827_primitive.cif' # the input CIF file, which will be 'CaTiO3'
 
 input_cif = CifParser(file_input, occupancy_tolerance=2.0) # read the input CIF file
 
@@ -21,10 +21,11 @@ input_structure = input_cif.get_structures(primitive = True)[0] # read the struc
 
 incar_setting = {'ISPIN':2,'ICHARG':1,'NELM':100,'NELMIN':100,'IBRION':2,'EDIFF':2E-6,'ISIF':3,'LREAL':'AUTO','ISMEAR':-5,'SIGMA':0.05,'LWAVE':'true','ISYM': 0, 'NPAR': 1} # this is a custom setting. You may search ISYM and NPAR for VASP tags
                                        # NPAR is related to parallel computation. I set 1 here to avoid weird failure
+                                       #other parameters settings are gotten from https://materialsproject.org/materials/mp-5827/#
 
 input_set = MPRelaxSet(structure=input_structure, user_incar_settings=incar_setting) # pymatgen will generate all
                                                                                      # 4 files for you.
-output_dir = 'E:/ehull/peroviskate./first_VASP/'
+output_dir = './first_VASP/'
 
 input_set.write_input(output_dir, make_dir_if_not_present=True)
 # after this, you should be able to see a new directory in your folder, whose name is 'first_VASP', and there are 4
